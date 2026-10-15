@@ -2722,11 +2722,22 @@ const BR=[
  [/(rövanş|rovans|tekrar|bir daha|bi daha)/i,['Olur, bir el daha atarız','Tamamdır','Gel bakalım 😄']],
  [/(çay|cay|kahve|simit)/i,['Çaylar benden 😄','Ocakçı iki çay!','Kahve olsa iyi giderdi']],
  [/\?$/,['Bilmem ki 🙂','Olabilir','Hmm','Sonra konuşuruz, oyuna bakalım']]];
+const CHEAP=/^(s\.?a\.?|sa|selam|slm|selamün|selamun|merhaba|mrb|meraba|hey|hi|sea|selamlar|sağol|sagol|sağ ol|teşekkürler|tesekkurler|eyvallah|tşk|tsk|haha+|hehe+|ahah+|sjsj+|ksks+|😂+|😄+|lol|ok|tamam|tm|tmm|iyi oyunlar|kolay gelsin|bol şans)[\s!.?]*$/i;
+function localReply(t,P){for(const[re,ans]of BR)if(re.test(t)){if(Math.random()<Math.max(.8,P.ch||.8))botSay(pick2(ans).replace('__CITY__',OPP[diff].city||'İstanbul'));return;}
+  if(Math.random()<.45*(P.ch||.8))botSay(pick2(['🙂','Hı hı','Aynen','Hadi bakalım','😄','Olur']));}
+let aiBusy=false;
+async function aiReply(){const F=OPP[diff];if(!F||!AU.st||!AU.st.ai||aiBusy)return false;aiBusy=true;const g=gid,t0=performance.now();
+  try{const h=chLog.slice(0,8).filter(m=>!m.sys).reverse().map(m=>({f:m.side===mySide?'u':'b',t:m.txt}));
+    const ctx='senin pip '+pip(st,1)+', rakibin pip '+pip(st,0)+', maç '+match.b+'-'+match.p+(st.bar[1]?', kırık pulun var':'')+(st.bar[0]?', rakibin kırık pulu var':'');
+    const j=await api('POST','/tv/chat',{p:{n:F.name,c:F.city||'',low:!!(F.persona&&F.persona.low)},h,ctx});
+    if(g!==gid)return true;const x=filt(String(j.x||'')).slice(0,120);if(!x)return true;
+    botSay(x,Math.max(300,900+Math.min(3200,x.length*85)-(performance.now()-t0)));return true;}
+  catch(e){return false;}finally{aiBusy=false;}}
 function botHear(t,qi,bad){if(!OPP[diff])return;const P=OPP[diff].persona||{ch:.8};
   if(bad){if(Math.random()<.9)botSay(pick2(['Ayıp oluyor, kahvehanede adap var.','Sakin ol, oyun bu 🙂','Terbiyeni bozma bak.','Yakışmadı.']));return;}
   if(qi!=null&&CHAT[qi]&&Math.random()<.85){botSay(CHAT[qi][1]);return;}
-  for(const[re,ans]of BR)if(re.test(t)){if(Math.random()<Math.max(.8,P.ch||.8))botSay(pick2(ans).replace('__CITY__',OPP[diff].city||'İstanbul'));return;}
-  if(Math.random()<.45*(P.ch||.8))botSay(pick2(['🙂','Hı hı','Aynen','Hadi bakalım','😄','Olur']));}
+  if(CHEAP.test(t.trim())||Math.random()<.06){localReply(t,P);return;}
+  aiReply().then(ok=>{if(!ok)localReply(t,P);});}
 function botGotGift(k){const g=gid;botSay(pick2(['Eyvallah, eline sağlık 🙏','Sağ ol, çayın hatırı kırk yıl 🙂','Ooo teşekkürler!','Afiyetle içerim, sağ ol','Eyvallah kardeşim']),1500+Math.random()*1200);
   if(Math.random()<.4)setTimeout(()=>{if(g===gid&&mode==='solo'&&phase!=='menu'&&phase!=='over')giftFly(1,0,pick2(['cay','kahve','simit']));},3800+Math.random()*2500);}
 function botOpenChat(){if(mode!=='solo')return;const F=OPP[diff];if(!F)return;const P=F.persona||{ch:.5};
