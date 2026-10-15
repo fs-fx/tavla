@@ -1,0 +1,14 @@
+{
+  "appId": "com.fsfx.tavla",
+  "appName": "Tavla",
+  "webDir": "www",
+  "backgroundColor": "#0e090b",
+  "ios": {
+    "contentInset": "never",
+    "backgroundColor": "#0e090b",
+    "scrollEnabled": false
+  },
+  "android": {
+    "backgroundColor": "#0e090b"
+  }
+}
