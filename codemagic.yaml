@@ -106,7 +106,7 @@ workflows:
           set -e
           mkdir -p www && cp index.html www/index.html
           echo '{"name":"tavla","version":"1.0.0","private":true}' > package.json
-          npm install @capacitor/core@8.5.3 @capacitor/cli@8.5.3 @capacitor/android@8.5.3
+          npm install @capacitor/core@8.5.3 @capacitor/cli@8.5.3 @capacitor/android@8.5.3 @capacitor/haptics@8.0.2
           npx cap add android
           npx cap sync android
       - name: Ikon, acilis ekrani, ayarlar (Android)
@@ -155,7 +155,7 @@ workflows:
           set -e
           mkdir -p www && cp index.html www/index.html
           echo '{"name":"tavla","version":"1.0.0","private":true}' > package.json
-          npm install @capacitor/core@8.5.3 @capacitor/cli@8.5.3 @capacitor/android@8.5.3
+          npm install @capacitor/core@8.5.3 @capacitor/cli@8.5.3 @capacitor/android@8.5.3 @capacitor/haptics@8.0.2
           npx cap add android
           npx cap sync android
       - name: Ikon, acilis ekrani, ayarlar (Android)

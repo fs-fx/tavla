@@ -2,7 +2,7 @@
 <title>Kahvehane Tavlası</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=Yeseva+One&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700&family=Alegreya+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&family=Yeseva+One&display=swap">
 <style>
 /* Layout: always-landscape stage; board fills the screen, chrome reduced to a menu chip, a status pill and a thumb-side action rail */
 :root{
@@ -250,6 +250,80 @@ body.flip .cards{flex-direction:column-reverse!important}
 
 #autoBtn .kc{font-size:9px;letter-spacing:-1px}
 #autoBtn.on{background:var(--brass);color:#1c120a}
+
+/* ===== Ayarlar penceresi ===== */
+#setWrap{position:absolute;inset:0;z-index:8;background:rgba(6,3,4,.62);display:grid;place-items:center;
+  padding:max(8px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(8px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.smod{position:relative;width:min(860px,100%);height:min(560px,100%);display:grid;grid-template-rows:auto minmax(0,1fr);border-radius:22px;
+  padding:clamp(8px,2.2vh,16px) clamp(12px,2vw,22px) clamp(10px,2.4vh,20px);
+  background:radial-gradient(ellipse at 25% 0%,rgba(140,70,30,.22),transparent 55%),linear-gradient(180deg,#21140f,#130b09);
+  border:1.5px solid #b98a4a;box-shadow:inset 0 0 0 4px #170d0a,inset 0 0 0 5px rgba(214,167,92,.32),0 30px 80px rgba(0,0,0,.7);animation:smIn .22s ease-out}
+@keyframes smIn{from{transform:scale(.96);opacity:0}}
+.smod .crn{position:absolute;left:6px;top:6px;width:clamp(44px,12vh,72px);color:rgba(214,167,92,.55);pointer-events:none}
+.smh{display:flex;align-items:center;justify-content:center;gap:12px;position:relative;min-height:clamp(40px,10vh,56px)}
+.smh h2{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(19px,4.8vh,30px);letter-spacing:.3em;padding-left:.3em;color:#ebc98d;text-shadow:0 2px 12px rgba(214,167,92,.28)}
+.orn{width:clamp(36px,7vw,58px);color:var(--brass);display:flex}.orn svg{width:100%}.orn.r{transform:scaleX(-1)}
+.smx{position:absolute;right:0;top:50%;transform:translateY(-50%);width:clamp(38px,9vh,48px);height:clamp(38px,9vh,48px);border-radius:50%;border:1.5px solid #b98a4a;background:rgba(0,0,0,.35);color:#f4e6c8;display:grid;place-items:center;cursor:pointer;box-shadow:inset 0 0 0 3px rgba(0,0,0,.4)}
+.smx svg{width:50%;height:50%}
+.smb{display:grid;grid-template-columns:clamp(128px,22%,190px) minmax(0,1fr);gap:clamp(8px,1.6vw,18px);min-height:0;margin-top:clamp(4px,1.4vh,10px)}
+.smtabs{display:grid;align-content:start;gap:clamp(4px,1.1vh,9px);overflow-y:auto;min-height:0;padding:2px}
+.smt{display:flex;align-items:center;gap:12px;min-height:clamp(34px,8.4vh,50px);padding:0 14px;border-radius:9px;cursor:pointer;text-align:left;
+  border:1px solid rgba(214,167,92,.24);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(0,0,0,.18));color:#dcc6a2;
+  font-family:'Alegreya',Georgia,serif;font-size:clamp(14px,3.4vh,17px);box-shadow:inset 0 1px 0 rgba(255,230,190,.05)}
+.smt svg{width:20px;height:20px;flex:none;color:#e9cf9e}
+.smt.on{background:linear-gradient(180deg,#922f25,#5e1812);border-color:#d6a05a;color:#fff0d4;box-shadow:inset 0 1px 0 rgba(255,220,170,.28),0 4px 14px rgba(120,20,10,.35)}
+.smt.on svg{color:#ffe2a8}
+.smc{border:1px solid rgba(214,167,92,.3);border-radius:14px;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.3));overflow-y:auto;min-height:0;padding:2px clamp(12px,1.8vw,22px);-webkit-overflow-scrolling:touch;overscroll-behavior:contain;box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+.smp[hidden]{display:none!important}
+.smp.pad{padding:12px 0 16px;display:grid;gap:12px}
+.srw{display:flex;align-items:center;gap:clamp(10px,1.6vw,16px);min-height:clamp(54px,12.5vh,76px);border-bottom:1px solid rgba(214,167,92,.15);padding:6px 0}
+.smp>.srw:last-child{border-bottom:0}
+.sic{width:clamp(34px,8.8vh,44px);height:clamp(34px,8.8vh,44px);flex:none;border-radius:50%;border:1px solid rgba(214,167,92,.42);display:grid;place-items:center;color:#e8c98e;background:radial-gradient(circle at 50% 35%,rgba(255,220,160,.06),rgba(0,0,0,.3));box-shadow:inset 0 0 0 3px rgba(0,0,0,.3)}
+.sic svg{width:50%;height:50%}
+.stx{flex:1;min-width:0}
+.stx b{display:block;font-family:'Alegreya',Georgia,serif;font-weight:500;font-size:clamp(15px,3.6vh,19px);color:#f4e4c4;line-height:1.15}
+.stx small{display:block;color:#b59c7a;font-size:clamp(11.5px,2.8vh,13.5px);font-family:'Alegreya',Georgia,serif;margin-top:2px;line-height:1.2}
+.sct{flex:none;display:flex;align-items:center;gap:10px}
+.sct .seg{min-width:min(230px,38vw)}
+.sct .seg button{white-space:nowrap;padding:0 10px}
+.smc .tg{width:62px;height:32px;border-radius:16px;border:1px solid #6e4f2c;background:linear-gradient(180deg,#2c1a12,#1d110c);box-shadow:inset 0 2px 4px rgba(0,0,0,.5)}
+.smc .tg::after{width:26px;height:26px;top:2px;left:2px;background:radial-gradient(circle at 40% 35%,#fffaf0,#e3cfa8 70%,#b99a6a);box-shadow:0 2px 4px rgba(0,0,0,.5)}
+.smc .tg[aria-pressed="true"]{background:linear-gradient(180deg,#c99a52,#8a5e25);border-color:#e3b56e}
+.smc .tg[aria-pressed="true"]::after{transform:translateX(30px)}
+.rng{-webkit-appearance:none;appearance:none;width:clamp(110px,21vw,220px);height:8px;border-radius:4px;margin:0;cursor:pointer;
+  background:linear-gradient(90deg,#c88d3f,#f0c472 var(--p,50%),rgba(255,255,255,.1) var(--p,50%));outline:0;box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff0c8,#dcae62 55%,#8d5c21);border:2px solid #4e3214;box-shadow:0 2px 6px rgba(0,0,0,.6),0 0 0 3px rgba(240,196,114,.18)}
+.rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff0c8,#dcae62 55%,#8d5c21);border:2px solid #4e3214}
+.pct{width:44px;text-align:right;color:#e8c98e;font-variant-numeric:tabular-nums;font-family:'Alegreya',Georgia,serif;font-size:15px}
+.sel{-webkit-appearance:none;appearance:none;min-width:clamp(140px,22vw,200px);height:clamp(38px,9vh,46px);padding:0 38px 0 14px;border-radius:8px;border:1px solid #b98a4a;cursor:pointer;
+  background:#160d0a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5z' fill='%23f0dcb4'/%3E%3C/svg%3E") no-repeat right 13px center/12px;
+  color:#f4e4c4;font-family:'Alegreya',Georgia,serif;font-size:16px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.35)}
+.sel option{background:#1d120e;color:#f4e4c4}
+.smp .sw{padding:0 0 12px}
+.pfh{display:flex;align-items:center;gap:16px}
+.pfh .pfav{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;flex:none;font-family:var(--display);font-size:28px;color:#3a1406;background:radial-gradient(circle at 40% 35%,#fff8e6,#e6d3ad 60%,#b79566);box-shadow:0 0 0 3px #6e4f2c,0 6px 14px rgba(0,0,0,.5)}
+.pfh .nm-in{flex:1}
+.abt{text-align:center;display:grid;gap:6px;padding:10px 0}
+.abt h3{margin:0;font-family:var(--display);font-size:26px;color:#ebc98d;letter-spacing:.06em}
+.abt p{margin:0;color:#c9b08b;font-family:'Alegreya',Georgia,serif}
+/* ===== Menü ikon çubuğu ===== */
+.dock{display:flex;gap:clamp(8px,2.2vw,24px);align-items:flex-start;justify-content:center}
+.dk{display:grid;justify-items:center;gap:clamp(3px,.9vh,7px);background:none;border:0;cursor:pointer;color:#efdcb8;padding:0;font-family:'Alegreya',Georgia,serif;font-size:clamp(11px,2.9vh,15px);text-shadow:0 1px 4px #000}
+.dkc{width:clamp(38px,12vh,62px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;color:#f0cf93;
+  background:radial-gradient(circle at 50% 30%,#3c2518,#170e0a 72%);border:1.5px solid #8c6634;
+  box-shadow:inset 0 0 0 3px rgba(0,0,0,.45),inset 0 0 0 4px rgba(214,167,92,.22),0 5px 14px rgba(0,0,0,.55);transition:transform .15s,box-shadow .2s}
+.dk:hover .dkc{transform:translateY(-2px)}.dk:active .dkc{transform:scale(.93)}
+.dkc svg{width:46%;height:46%}
+.dk.hot .dkc{border-color:#f0c983;box-shadow:inset 0 0 0 3px rgba(0,0,0,.45),inset 0 0 0 4px rgba(240,201,131,.35),0 0 18px rgba(240,190,110,.45),0 5px 14px rgba(0,0,0,.55)}
+.dk.off .dkc{color:#6f604f;border-color:#4f3a24}.dk.off .dkl{opacity:.55}
+.dk:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:12px}
+/* ===== Oyun içi: buton etiketleri, zar butonu ===== */
+.r2{align-items:flex-start}
+.r2 .rb{position:relative;margin-bottom:15px}
+.r2 .rb::after{content:attr(title);position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;font-family:'Alegreya',Georgia,serif;font-size:11.5px;color:#d9c3a0;white-space:nowrap;pointer-events:none}
+#main{position:relative}
+#main::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(214,167,92,.38);pointer-events:none}
+#main::after{content:"";position:absolute;left:50%;top:-14px;width:6px;height:6px;margin-left:-3px;transform:rotate(45deg);background:var(--brass);box-shadow:0 calc(100% + 0px) 0 transparent;pointer-events:none;opacity:.8}
 </style>
 </head><body>
 
@@ -310,6 +384,7 @@ body.flip .cards{flex-direction:column-reverse!important}
     <div class="row"><div>Kırma efekti<small>Pul havaya uçar, ağır çekim, şok dalgası</small></div><button class="tg" id="tFx" aria-label="Kırma efekti"></button></div>
     <div class="row col"><div>Kamera yakınlaşması</div><div class="seg" id="segCam"><button data-v="off">Kapalı</button><button data-v="hit">Kırmada</button><button data-v="all">Her hamlede</button></div></div>
   </section>
+  <button class="btn ghost" id="drSet" style="display:flex;align-items:center;justify-content:center;gap:10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>Ayarlar</button>
   <div class="srow"><button class="btn main" id="newHandBtn">Yeni maç</button><button class="btn ghost" id="menuHome">Ana menü</button></div>
 </aside>
 <div id="menu" hidden>
@@ -332,18 +407,11 @@ body.flip .cards{flex-direction:column-reverse!important}
       <button class="mode soon" data-mode="online"><span class="pul dark"><svg class="ros" viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="1.8"><circle r="46"/><circle r="34"/><circle cx="15.00" cy="0.00" r="15"/><circle cx="10.61" cy="10.61" r="15"/><circle cx="-0.00" cy="15.00" r="15"/><circle cx="-10.61" cy="10.61" r="15"/><circle cx="-15.00" cy="-0.00" r="15"/><circle cx="-10.61" cy="-10.61" r="15"/><circle cx="0.00" cy="-15.00" r="15"/><circle cx="10.61" cy="-10.61" r="15"/></svg><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a11 11 0 0116 0M7 13.5a6.5 6.5 0 0110 0"/><circle cx="12" cy="18" r="2.4"/></svg><span class="soon-tag">YAKINDA</span></span><b>Çevrimiçi<small>Rastgele rakip</small></b></button>
       <button class="mode" data-mode="friend"><span class="pul dark"><svg class="ros" viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width="1.8"><circle r="46"/><circle r="34"/><circle cx="15.00" cy="0.00" r="15"/><circle cx="10.61" cy="10.61" r="15"/><circle cx="-0.00" cy="15.00" r="15"/><circle cx="-10.61" cy="10.61" r="15"/><circle cx="-15.00" cy="-0.00" r="15"/><circle cx="-10.61" cy="-10.61" r="15"/><circle cx="0.00" cy="-15.00" r="15"/><circle cx="10.61" cy="-10.61" r="15"/></svg><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v3a2 2 0 000 4v3H3v-3a2 2 0 000-4z"/><path d="M10 9.5l-1 5M14 9.5l-1 5M8.2 11h6.6M7.8 13h6.6"/></svg></span><b>Arkadaş<small>Oda koduyla</small></b></button>
     </div>
-    <div class="tesbih" aria-label="Menü">
-      <button class="wb" id="icStats" aria-label="İstatistikler" title="İstatistikler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-7"/></svg></button>
-      <button class="wb" id="icAch" aria-label="Başarımlar" title="Başarımlar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"/></svg></button>
-      <button class="wb" id="icHow" aria-label="Nasıl oynanır" title="Nasıl oynanır"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 9a3 3 0 015.6 1.2c0 2-2.8 2.4-2.8 4.3M12 18.5v.1"/></svg></button>
-      <button class="wb" id="icSet" aria-label="Ayarlar" title="Ayarlar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
-      <button class="wb" id="icSnd" aria-label="Ses" title="Ses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9.5a3.5 3.5 0 010 5"/></svg></button>
-      <button class="wb" id="icTheme" aria-label="Tahta teması" title="Tahta teması"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L9 4l5 16M15 20l2.5-8 2.5 8"/></svg></button>
-      <span class="imame" aria-hidden="true"></span>
-    </div>
+    <div class="dock" aria-label="Menü"><button class="dk" id="icStats"><span class="dkc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11M12 20V5M19 20v-7"/></svg></span><span class="dkl">İstatistik</span></button><button class="dk" id="icAch"><span class="dkc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"/></svg></span><span class="dkl">Başarımlar</span></button><button class="dk" id="icHow"><span class="dkc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 9a3 3 0 015.6 1.2c0 2-2.8 2.4-2.8 4.3M12 18.5v.1"/></svg></span><span class="dkl">Yardım</span></button><button class="dk hot" id="icSet"><span class="dkc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></span><span class="dkl">Ayarlar</span></button><button class="dk" id="icSnd"><span class="dkc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path d="M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11"/></svg></span><span class="dkl">Ses</span></button><button class="dk" id="icMus"><span class="dkc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8v8M10 5v14M14 8v8M18 10v4"/></svg></span><span class="dkl">Müzik</span></button></div>
   </div>
 </div>
 <div id="sheetWrap" hidden><div class="sheet" role="dialog" aria-modal="true"><header><h2 id="shT"></h2><button class="rb" id="shX" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header><div id="shB"></div></div></div>
+<div id="setWrap" hidden><div class="smod" role="dialog" aria-modal="true" aria-labelledby="smT"><svg class="crn" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M4 70V22C4 12 12 4 22 4h48"/><path d="M10 64V26c0-9 7-16 16-16h38"/><path d="M14 30c6 0 10 4 10 10M30 14c0 6 4 10 10 10"/><circle cx="22" cy="22" r="4"/><path d="M22 18c0-5 3-8 8-8M18 22c-5 0-8 3-8 8"/></svg><header class="smh"><span class="orn"><svg viewBox="0 0 60 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 8h22M36 8h22"/><path d="M24 8l6-5 6 5-6 5z"/><circle cx="30" cy="8" r="1.6" fill="currentColor"/><path d="M8 8c2-3 5-3 7 0M45 8c2 3 5 3 7 0"/></svg></span><h2 id="smT">AYARLAR</h2><span class="orn r"><svg viewBox="0 0 60 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 8h22M36 8h22"/><path d="M24 8l6-5 6 5-6 5z"/><circle cx="30" cy="8" r="1.6" fill="currentColor"/><path d="M8 8c2-3 5-3 7 0M45 8c2 3 5 3 7 0"/></svg></span><button class="smx" id="smX" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header><div class="smb"><nav class="smtabs" id="smTabs"></nav><div class="smc" id="smC"></div></div></div></div>
 <div id="toast"></div>
 <div id="over" hidden>
   <div class="card glass">
@@ -1687,13 +1755,13 @@ function fit(){
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));fit();
 
 /* =================== AUDIO =================== */
-let ac=null,noiseBuf=null,muted=false;
-function ensureAudio(){if(!ac){try{ac=new(window.AudioContext||window.webkitAudioContext)();const n=ac.sampleRate*.2;noiseBuf=ac.createBuffer(1,n,ac.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;}catch(e){ac=null;}}
-  if(ac&&ac.state==='suspended')ac.resume();}
+let ac=null,noiseBuf=null,muted=false,sfxG=null;
+function ensureAudio(){if(!ac){try{ac=new(window.AudioContext||window.webkitAudioContext)();const n=ac.sampleRate*.2;noiseBuf=ac.createBuffer(1,n,ac.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;sfxG=ac.createGain();sfxG.gain.value=Math.pow((settings.sfxV||0)/100,1.3);sfxG.connect(ac.destination);}catch(e){ac=null;}}
+  if(ac&&ac.state==='suspended'&&!document.hidden)ac.resume();if(ac)musApply();}
 function clack(vol=1,freq=2600,len=.09){if(!ac||muted)return;const t=ac.currentTime,src=ac.createBufferSource();src.buffer=noiseBuf;
   const bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=freq*(.8+Math.random()*.4);bp.Q.value=2.5;
   const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.55*vol,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+len);
-  src.connect(bp);bp.connect(g);g.connect(ac.destination);src.start(t);src.stop(t+len+.03);}
+  src.connect(bp);bp.connect(g);g.connect(sfxG||ac.destination);src.start(t);src.stop(t+len+.03);}
 const thock=()=>{clack(.9,700,.12);clack(.35,3400,.05);};
 
 /* =================== GAME STATE / UI =================== */
@@ -1732,13 +1800,13 @@ function miniDie(v,used){return'<div class="mini'+(used?' used':'')+'">'+Array.f
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* --- settings & effects --- */
-const settings={hitRun:true,autoRace:false,bloom:true,fx:true,cam:'all',autoRoll:true,autoConfirm:false,sound:true,theme:'kahve',timer:0,matchLen:3,cube:true,quality:'auto'};
+const settings={sfxV:80,musV:40,music:true,vib:true,hitRun:true,autoRace:false,bloom:true,fx:true,cam:'all',autoRoll:true,autoConfirm:false,sound:true,theme:'kahve',timer:0,matchLen:3,cube:true,quality:'auto'};
 try{const o=JSON.parse(localStorage.getItem('kahvehane-tavla-ayar')||'{}');if(o&&typeof o==='object')Object.assign(settings,o);}catch(e){}
 if(settings.v!==2){settings.autoConfirm=false;settings.v=2;}
 function saveSet(){saveJ('kahvehane-tavla-ayar',settings);}
 const TOG=[['tAuto','autoRoll'],['tConf','autoConfirm'],['tSnd','sound'],['tBloom','bloom'],['tFx','fx'],['tCube','cube'],['tHr','hitRun'],['tAutoR','autoRace']];
 function applySet(){
-  muted=!settings.sound;
+  muted=!settings.sound||!settings.sfxV;if(sfxG)sfxG.gain.value=Math.pow((settings.sfxV||0)/100,1.3);
   TOG.forEach(([id,k])=>$(id).setAttribute('aria-pressed',String(k==='bloom'?(!!composer&&settings.bloom):k==='hitRun'?HITRUN():!!settings[k])));$('tHr').disabled=mode==='net';$('tCube').disabled=mode==='net';
   $('tBloom').disabled=!composer;if(!composer)$('bloomNote').textContent='Bu cihazda desteklenmiyor';
   document.querySelectorAll('#segCam button').forEach(b=>b.classList.toggle('on',b.dataset.v===settings.cam));
@@ -1788,9 +1856,10 @@ const impactLight=new THREE.PointLight(0xffa050,0,14,2);scene.add(impactLight);
 function whoosh(){if(!ac||muted)return;const t=ac.currentTime,src=ac.createBufferSource();src.buffer=noiseBuf;src.loop=true;
   const f=ac.createBiquadFilter();f.type='bandpass';f.Q.value=1.1;f.frequency.setValueAtTime(260,t);f.frequency.exponentialRampToValueAtTime(1900,t+.4);f.frequency.exponentialRampToValueAtTime(420,t+1.1);
   const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.32,t+.18);g.gain.exponentialRampToValueAtTime(.0001,t+1.2);
-  src.connect(f);f.connect(g);g.connect(ac.destination);src.start(t);src.stop(t+1.25);}
+  src.connect(f);f.connect(g);g.connect(sfxG||ac.destination);src.start(t);src.stop(t+1.25);}
 function toast(txt){const el=$('toast');el.textContent=txt;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
-function impact(pos,side){
+function impactBz(){buzz(45);}
+function impact(pos,side){impactBz();
   clack(1.2,1500,.16);clack(1,240,.32);
   if(!settings.fx){burst(pos,0xff7a3a,36,3);return;}
   whoosh();
@@ -2020,7 +2089,7 @@ async function doHumanMove(m){
   busy=true;selected=null;
   undoStack.push({st:clone(st),rem:rem.slice(),log:turnLog.slice(),hits:handHits,mv:turnMv.slice()});turnMv.push({from:m.from,to:m.to,d:m.d,hit:!!m.hit});
   rem=removeOne(rem,m.d);turnLog.push(nota(me,m));if(m.hit&&mode==='solo'&&me===0){handHits++;if(Math.random()<.6){const gg=gid;setTimeout(()=>{if(gg===gid)say(1,pick(['Vay vay…','Şansına bak!','Bunu unutmam.','Hele hele…']));},900);}}
-  renderUI();const g=gid;await performMove(me,m);if(g!==gid)return;busy=false;
+  renderUI();const g=gid;await performMove(me,m);if(g!==gid)return;busy=false;buzz(12);
   if(st.off[me]===15){finishHumanLog();if(mode==='net')netSend({t:'turn',mv:turnMv,s:st});return endGame(me);}
   refreshLegal();
   if(!legal.length){phase='human-confirm';status('Hamleler bitti',settings.autoConfirm?'':'Tamam\'a bas ya da geri al.');
@@ -2033,7 +2102,7 @@ async function humanRoll(){
   const g=gid;rollTok++;busy=true;turnDeadline=0;if(rolled.length)prevRoll=rolled.slice(0,2);rolled=[];rem=[];renderUI();status('Zar atılıyor…','');
   const a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6),h=me===0?0:1;if(mode==='net')netSend({t:'roll',a,b});
   await rollDice([{die:dice[0],value:a,half:h},{die:dice[1],value:b,half:h}]);if(g!==gid)return;
-  startHumanTurn(a===b?[a,a,a,a]:[a,b]);
+  buzz(a===b?40:18);startHumanTurn(a===b?[a,a,a,a]:[a,b]);
 }
 function startHumanTurn(r){
   st.lk=null;rolled=r;rem=r.slice();undoStack=[];turnLog=[];turnMv=[];selected=null;busy=false;refreshLegal();
@@ -2212,7 +2281,7 @@ function sheetHow(){
   <p><b>Kontroller:</b> Pulu sürükle ya da dokun. Tek gidebileceği yer varsa kendisi gider. Bir haneye tek pul gidebiliyorsa direkt o haneye dokun. Hatalı hamleyi sağ alttaki ok ile geri al.</p></div>`);
 }
 const setHome=$('setRows').parentNode,setNext=$('setRows').nextSibling;
-function sheetSettings(){openSheet('Ayarlar','',b=>{b.appendChild($('setRows'));$('setRows').querySelector('h3').hidden=true;
+function sheetSettings(){openSet('genel');return;openSheet('Ayarlar','',b=>{b.appendChild($('setRows'));$('setRows').querySelector('h3').hidden=true;
   sheetCleanup=()=>{$('setRows').querySelector('h3').hidden=false;setHome.insertBefore($('setRows'),setNext);};});}
 function sheetTheme(){
   openSheet('Tahta teması','<div class="sw">'+Object.entries(THEMES).map(([k,t])=>`<button class="swb${settings.theme===k?' on':''}" data-k="${k}">${themeSwatch(t)}<span>${t.name}</span></button>`).join('')+'</div>',
@@ -2234,12 +2303,11 @@ function sheetProfile(){
 }
 document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{ensureAudio();clack(.4,3800,.05);const k=b.dataset.mode;
   if(k==='solo')sheetSolo();else if(k==='duo')sheetDuo();else if(k==='friend')sheetFriend();else sheetSoon('Çevrimiçi');}));
-$('profBtn').addEventListener('click',sheetProfile);
-$('icStats').addEventListener('click',sheetStats);
-$('icAch').addEventListener('click',sheetAch);
+$('profBtn').addEventListener('click',()=>openSet('profil'));
+$('icStats').addEventListener('click',()=>openSet('istat'));
+$('icAch').addEventListener('click',()=>openSet('basari'));
 $('icHow').addEventListener('click',sheetHow);
-$('icSet').addEventListener('click',sheetSettings);
-$('icTheme').addEventListener('click',sheetTheme);
+$('icSet').addEventListener('click',()=>openSet('genel'));
 $('icSnd').addEventListener('click',()=>{ensureAudio();settings.sound=!settings.sound;saveSet();applySet();if(settings.sound)clack(.5,3000,.06);});
 applySet();
 if(settings.theme!=='kahve')applyTheme(settings.theme);
@@ -2380,6 +2448,101 @@ async function guestLobby(code){
 }
 {const q=new URLSearchParams(location.search).get('oda');if(q&&/^[A-Za-z0-9]{4}$/.test(q))setTimeout(()=>{try{history.replaceState(null,'',location.pathname);}catch(e){}sheetFriend(q.toUpperCase());},600);}
 window.__kt={get phase(){return phase},get me(){return me},get mySide(){return mySide},get st(){return st},get legal(){return legal},get busy(){return busy},get rem(){return rem},smartTap:L=>smartTap(L),move:m=>doHumanMove(m),get match(){return match},get matchOver(){return matchOver},T:{singleMoves,applyMove,legalMoves,isRace,barClosed,setSt:s=>{st=s;syncMeshes(st,true);renderUI();},setPhase:(p,m)=>{phase=p;me=m;},maybeAutoRoll:()=>maybeAutoRoll(),settings}};
+
+
+/* =================== AYARLAR PENCERESİ =================== */
+const IC={"gear": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3.2\"/><path d=\"M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.9 1.9M17.5 17.5l1.9 1.9M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.9-1.9M17.5 6.5l1.9-1.9\"/><circle cx=\"12\" cy=\"12\" r=\"6.4\"/></svg>", "user": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21c1.2-4.2 4.3-6 8-6s6.8 1.8 8 6\"/></svg>", "pie": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a9 9 0 109 9h-9z\"/><path d=\"M15 3.5A9 9 0 0120.5 9H15z\"/></svg>", "star": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z\"/></svg>", "pad": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 8h10a4 4 0 014 4.5l-.6 3.6a2.6 2.6 0 01-4.6 1.1L14.5 15h-5l-1.3 2.2a2.6 2.6 0 01-4.6-1.1L3 12.5A4 4 0 017 8z\"/><path d=\"M8 11v3M6.5 12.5h3M15.5 12h.01M17.5 13.5h.01\"/></svg>", "palette": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a9 9 0 100 18c1.3 0 1.8-1 1.3-2-.6-1.2.2-2.5 1.6-2.5H17a4 4 0 004-4c0-5-4-9.5-9-9.5z\"/><circle cx=\"7.5\" cy=\"11\" r=\"1.2\"/><circle cx=\"10\" cy=\"7\" r=\"1.2\"/><circle cx=\"14.5\" cy=\"7\" r=\"1.2\"/></svg>", "info": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v6M12 7.5v.01\"/></svg>", "spk": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z\"/><path d=\"M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11\"/></svg>", "mus": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 8v8M10 5v14M14 8v8M18 10v4\"/></svg>", "vib": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"7.5\" y=\"3\" width=\"9\" height=\"18\" rx=\"2\"/><path d=\"M11 17.5h2M3.5 9v6M20.5 9v6\"/></svg>", "play": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M10 8.5l5.5 3.5-5.5 3.5z\"/></svg>", "globe": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z\"/></svg>", "mon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"4.5\" width=\"18\" height=\"12\" rx=\"1.5\"/><path d=\"M9 20.5h6M12 16.5v4\"/></svg>", "dice": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.5\"/><circle cx=\"9\" cy=\"9\" r=\"1\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"15\" r=\"1\" fill=\"currentColor\"/><circle cx=\"15\" cy=\"9\" r=\"1\" fill=\"currentColor\"/><circle cx=\"9\" cy=\"15\" r=\"1\" fill=\"currentColor\"/></svg>", "check": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M8 12.5l2.8 2.8L16.5 9.5\"/></svg>", "clock": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"13\" r=\"8\"/><path d=\"M12 9v4l2.5 2M10 2.5h4\"/></svg>", "hit": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 2.5L5 13h6l-1 8.5 8-10.5h-6z\"/></svg>", "cube": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l8 4.5v9L12 21l-8-4.5v-9z\"/><path d=\"M12 12l8-4.5M12 12v9M12 12L4 7.5\"/></svg>", "ff": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 6l7 6-7 6zM13 6l7 6-7 6z\"/></svg>", "spark": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6\"/></svg>", "cam": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8h3l1.5-2.5h7L17 8h3v11H4z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.5\"/></svg>", "q": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9.2 9a3 3 0 015.6 1.2c0 2-2.8 2.4-2.8 4.3M12 18.5v.1\"/></svg>", "bars": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 20V11M12 20V5M19 20v-7\"/></svg>", "sliders": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7h10M18 7h2M4 17h4M12 17h8\"/><circle cx=\"16\" cy=\"7\" r=\"2\"/><circle cx=\"10\" cy=\"17\" r=\"2\"/></svg>", "x": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 6l12 12M18 6L6 18\"/></svg>"};
+const TABS=[['genel','Genel',IC.gear],['profil','Profil',IC.user],['istat','İstatistik',IC.pie],['basari','Başarımlar',IC.star],['oyun','Oyun',IC.pad],['gorunum','Görünüm',IC.palette],['hakkinda','Hakkında',IC.info]];
+$('smTabs').innerHTML=TABS.map(([k,l,i])=>`<button class="smt" data-t="${k}">${i}<span>${l}</span></button>`).join('');
+const SR=(ic,t,s,id)=>`<div class="srw"><span class="sic">${ic}</span><div class="stx"><b>${t}</b>${s?'<small>'+s+'</small>':''}</div><div class="sct" id="${id}"></div></div>`;
+$('smC').innerHTML=
+ `<div class="smp" data-t="genel">${SR(IC.spk,'Ses Efektleri','Zar sesi, pul hareketi','cSfx')}${SR(IC.mus,'Müzik','Arka plan müziği','cMus')}${SR(IC.vib,'Titreşim','Hamle, kırma ve zar için titreşim','cVib')}${SR(IC.play,'Animasyonlar','Kırmada pul uçar, ağır çekim, şok dalgası','cFx')}${SR(IC.globe,'Dil','','cLang')}${SR(IC.mon,'Grafik Kalitesi','Görsel detay seviyesi','cQ')}</div>`+
+ `<div class="smp" data-t="oyun">${SR(IC.dice,'Otomatik zar','Sıran gelince zar kendiliğinden atılır','cAuto')}${SR(IC.check,'Otomatik onay','Zarlar bitince sıra direkt geçer','cConf')}${SR(IC.clock,'Hamle süresi','Süre dolunca en iyi hamle oynanır','cTim')}${SR(IC.hit,'Vur-kaç','Kırdığın pulla aynı turda yoluna devam edebilirsin','cHr')}${SR(IC.cube,'Katlama küpü','Zar atmadan önce eli ikiye katla','cCube')}${SR(IC.ff,'Yarışta otomatik oyna','Pullar birbirini geçince hamleler kendiliğinden oynanır','cAutoR')}</div>`+
+ `<div class="smp" data-t="gorunum">${SR(IC.palette,'Tahta teması','Tahta ve pul renkleri','cThH')}<div class="sw" id="cTheme"></div>${SR(IC.spark,'Parlama','Kıvılcım ve ışıkta ışıma','cBloom')}${SR(IC.cam,'Kamera yakınlaşması','Hamlelerde kamera pula yaklaşır','cCam')}</div>`+
+ `<div class="smp pad" data-t="profil"></div><div class="smp pad" data-t="istat"></div><div class="smp pad" data-t="basari"></div><div class="smp pad" data-t="hakkinda"></div>`;
+[['tFx','cFx'],['tAuto','cAuto'],['tConf','cConf'],['segTim','cTim'],['tHr','cHr'],['tCube','cCube'],['tAutoR','cAutoR'],['tBloom','cBloom'],['segCam','cCam']].forEach(([a,b])=>$(b).appendChild($(a)));
+$('setRows').hidden=true;
+$('cSfx').innerHTML='<input type="range" class="rng" id="rSfx" min="0" max="100" step="5" aria-label="Ses efektleri"><span class="pct" id="pSfx"></span>';
+$('cMus').innerHTML='<input type="range" class="rng" id="rMus" min="0" max="100" step="5" aria-label="Müzik"><span class="pct" id="pMus"></span>';
+$('cVib').innerHTML='<button class="tg" id="tVib" aria-label="Titreşim"></button>';
+$('cLang').innerHTML='<select class="sel" id="selLang" aria-label="Dil"><option value="tr">Türkçe</option><option value="en" disabled>English (yakında)</option></select>';
+$('cQ').innerHTML='<select class="sel" id="selQ" aria-label="Grafik kalitesi"><option value="auto">Otomatik</option><option value="high">Yüksek</option><option value="med">Orta</option><option value="low">Düşük</option></select>';
+function paintTheme(){$('cTheme').innerHTML=Object.entries(THEMES).map(([k,t])=>`<button class="swb${settings.theme===k?' on':''}" data-k="${k}">${themeSwatch(t)}<span>${t.name}</span></button>`).join('');}
+$('cTheme').addEventListener('click',e=>{const x=e.target.closest('.swb');if(!x)return;settings.theme=x.dataset.k;saveSet();applyTheme(settings.theme);paintTheme();clack(.4,4200,.04);});
+const rngPaint=()=>[['rSfx','pSfx','sfxV'],['rMus','pMus','musV']].forEach(([r,p,k])=>{const e=$(r),v=settings.music===false&&k==='musV'?0:settings[k];e.value=v;e.style.setProperty('--p',v+'%');$(p).textContent='%'+v;});
+$('rSfx').addEventListener('input',e=>{settings.sfxV=+e.target.value;if(settings.sfxV>0)settings.sound=true;applySet();});
+$('rSfx').addEventListener('change',()=>{saveSet();ensureAudio();clack(.7,3000,.06);});
+$('rMus').addEventListener('input',e=>{settings.musV=+e.target.value;settings.music=settings.musV>0;ensureAudio();applySet();});
+$('rMus').addEventListener('change',saveSet);
+$('tVib').addEventListener('click',()=>{settings.vib=!settings.vib;saveSet();applySet();buzz(35);});
+$('selQ').addEventListener('change',e=>{settings.quality=e.target.value;saveSet();applySet();applyQuality(settings.quality==='auto'?guessQuality():settings.quality);});
+$('icMus').addEventListener('click',()=>{ensureAudio();settings.music=!settings.music;if(settings.music&&!settings.musV)settings.musV=40;saveSet();applySet();});
+$('icSnd').addEventListener('click',()=>{if(settings.sound&&!settings.sfxV){settings.sfxV=80;saveSet();applySet();}});
+$('drSet').addEventListener('click',()=>{openDrawer(false);openSet('genel');});
+{const base=applySet;applySet=function(){base();try{rngPaint();$('tVib').setAttribute('aria-pressed',String(!!settings.vib));$('selQ').value=settings.quality;
+  $('icSnd').classList.toggle('off',!settings.sound||!settings.sfxV);$('icMus').classList.toggle('off',!settings.music||!settings.musV);musApply();}catch(e){}};}
+function buzz(ms){if(!settings.vib)return;try{const H=window.Capacitor&&window.Capacitor.Plugins&&window.Capacitor.Plugins.Haptics;
+  if(H&&H.impact){H.impact({style:ms>=40?'HEAVY':ms>=20?'MEDIUM':'LIGHT'}).catch(()=>{});return;}}catch(e){}
+  try{if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}}
+let smTab='genel';
+function setTab(t){smTab=t;const T=TABS.find(x=>x[0]===t)||TABS[0];
+  document.querySelectorAll('.smt').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  document.querySelectorAll('.smp').forEach(p=>p.hidden=p.dataset.t!==t);
+  $('smT').textContent=['genel','oyun','gorunum'].includes(t)?'AYARLAR':T[1].toLocaleUpperCase('tr');
+  const p=document.querySelector('.smp[data-t="'+t+'"]');$('smC').scrollTop=0;
+  if(t==='gorunum')paintTheme();
+  if(t==='istat'){const P=profile,rate=P.played?Math.round(P.won/P.played*100):0;
+    const T2=[['Rating',P.rating],['Puan',P.points],['Oynanan',P.played],['Kazanılan',P.won],['Kaybedilen',P.lost],['Galibiyet','%'+rate],['Mars',P.mars],['Kırılan pul',P.hits],['En iyi seri',P.best],['Kazanılan maç',(P.mWon||0)+'/'+(P.mPlayed||0)],['Arkadaş maçı',(P.netWon||0)+'/'+(P.netPlayed||0)]];
+    p.innerHTML='<div class="tiles">'+T2.map(([a,b])=>`<div class="tile"><small>${a}</small><b>${b}</b></div>`).join('')+'</div><div class="how" style="margin:0"><p>Rating ve puan Solo maçlarından hesaplanır.</p></div>';}
+  if(t==='basari'){const u=unlocked();p.innerHTML='<div class="how" style="margin:0"><p>'+u.length+' / '+ACH.length+' başarım açıldı</p></div>'+ACH.map(a=>`<div class="ach${u.includes(a.id)?' ok':''}"><span class="ai">${u.includes(a.id)?TICK:LOCK}</span><div class="at">${a.name}<small>${a.desc}</small></div></div>`).join('');}
+  if(t==='profil'){const n=profile.name||'Oyuncu';
+    p.innerHTML=`<div class="pfh"><span class="pfav" id="pfAv">${esc(initOf(n))}</span><input class="nm-in" id="pfName" maxlength="16" value="${esc(n)}" autocomplete="off" aria-label="Adın"><button class="btn main" id="pfSave">Kaydet</button></div>
+      <div class="tiles"><div class="tile"><small>Rating</small><b>${profile.rating}</b></div><div class="tile"><small>Puan</small><b>${profile.points}</b></div><div class="tile"><small>Oynanan</small><b>${profile.played}</b></div><div class="tile"><small>Kazanılan</small><b>${profile.won}</b></div></div>
+      <div class="srow"><button class="btn ghost" id="pfReset">İstatistikleri sıfırla</button></div>`;
+    const inp=p.querySelector('#pfName'),save=()=>{profile.name=inp.value.trim().slice(0,16)||'Oyuncu';saveJ('kt-profile',profile);renderProfile();renderUI();p.querySelector('#pfAv').textContent=initOf(profile.name);toast('Kaydedildi');};
+    p.querySelector('#pfSave').addEventListener('click',save);inp.addEventListener('keydown',e=>{if(e.key==='Enter'){save();inp.blur();}});
+    let armed=false;const rb=p.querySelector('#pfReset');rb.addEventListener('click',()=>{if(!armed){armed=true;rb.textContent='Emin misin? Tekrar dokun';return;}
+      Object.assign(profile,{rating:1200,points:0,played:0,won:0,lost:0,mars:0,hits:0,streak:0,best:0,beatHard:0,mWon:0,mPlayed:0,netWon:0,netPlayed:0});scores.solo={p:0,b:0};scores.duo={p:0,b:0};
+      saveJ('kt-profile',profile);saveJ('kt-scores',scores);renderProfile();setTab('profil');toast('İstatistikler sıfırlandı');});}
+  if(t==='hakkinda')p.innerHTML=`<div class="abt"><h3>Kahvehane Tavla</h3><p>Backgammon · Sürüm 1.1</p><p>Çay demlendi, zarlar ısındı. Masaya otur.</p></div>
+    <div class="srow" style="justify-content:center"><button class="btn main" id="abHow">Nasıl oynanır</button></div>
+    <div class="how" style="margin:0;text-align:center"><p>Solo, iki kişilik ve oda koduyla arkadaşla oyun. Geri bildirim için uygulama sayfasındaki iletişim adresini kullanabilirsin.</p></div>`,p.querySelector('#abHow').addEventListener('click',()=>{closeSet();sheetHow();});
+}
+function openSet(t){ensureAudio();closeSheet();applySet();$('setWrap').hidden=false;setTab(t||smTab);clack(.35,3800,.05);}
+function closeSet(){$('setWrap').hidden=true;}
+$('smTabs').addEventListener('click',e=>{const b=e.target.closest('.smt');if(b){setTab(b.dataset.t);clack(.3,4200,.04);}});
+$('smX').addEventListener('click',closeSet);
+$('setWrap').addEventListener('click',e=>{if(e.target.id==='setWrap')closeSet();});
+/* =================== MÜZİK (kahvehane havası, Hicaz) =================== */
+let musG=null,musTimer=0,musNext=0,musStep=0,musDrone=null,mel=4;
+const SCL=[0,1,4,5,7,8,10,12,13,16,17],MB=146.83,BEAT=.34,RHY=[1,0,2,2,1,0,2,0];
+const musOn=()=>!!(settings.music&&settings.musV>0&&!document.hidden);
+function musApply(){if(!ac)return;if(!musG){musG=ac.createGain();musG.gain.value=0;musG.connect(ac.destination);}
+  const v=musOn()?Math.pow(settings.musV/100,1.4)*.5:0;musG.gain.setTargetAtTime(v,ac.currentTime,.35);
+  if(musOn()&&!musTimer){musNext=ac.currentTime+.25;musTimer=setInterval(musTick,90);startDrone();}
+  else if(!musOn()&&musTimer){clearInterval(musTimer);musTimer=0;setTimeout(()=>{if(!musTimer)stopDrone();},1500);}}
+function startDrone(){if(musDrone)return;const o1=ac.createOscillator(),o2=ac.createOscillator(),g=ac.createGain(),lp=ac.createBiquadFilter();
+  o1.type='sawtooth';o2.type='sine';o1.frequency.value=MB/2;o2.frequency.value=MB*.75;lp.type='lowpass';lp.frequency.value=280;g.gain.value=.035;
+  o1.connect(lp);o2.connect(lp);lp.connect(g);g.connect(musG);o1.start();o2.start();musDrone={o1,o2};}
+function stopDrone(){if(!musDrone)return;try{musDrone.o1.stop();musDrone.o2.stop();}catch(e){}musDrone=null;}
+function pluck(f,t,v,d){const o=ac.createOscillator(),o2=ac.createOscillator(),g=ac.createGain(),g2=ac.createGain(),lp=ac.createBiquadFilter();
+  o.type='triangle';o2.type='sawtooth';o.frequency.value=f;o2.frequency.value=f*1.004;g2.gain.value=.22;lp.type='lowpass';
+  lp.frequency.setValueAtTime(f*7,t);lp.frequency.exponentialRampToValueAtTime(f*1.4,t+d);
+  o2.connect(g2);g2.connect(lp);o.connect(lp);lp.connect(g);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  g.connect(musG);o.start(t);o2.start(t);o.stop(t+d+.05);o2.stop(t+d+.05);}
+function tef(t,low){const s=ac.createBufferSource();s.buffer=noiseBuf;const f=ac.createBiquadFilter();f.type='bandpass';f.frequency.value=low?120:1700;f.Q.value=low?1.1:3;
+  const g=ac.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(low?.55:.14,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+(low?.22:.07));
+  s.connect(f);f.connect(g);g.connect(musG);s.start(t);s.stop(t+.25);
+  if(low){const o=ac.createOscillator(),og=ac.createGain();o.frequency.setValueAtTime(95,t);o.frequency.exponentialRampToValueAtTime(52,t+.2);og.gain.setValueAtTime(.35,t);og.gain.exponentialRampToValueAtTime(.0001,t+.24);o.connect(og);og.connect(musG);o.start(t);o.stop(t+.3);}}
+function musTick(){if(!ac||!musG)return;while(musNext<ac.currentTime+.35){const t=musNext,s=musStep%8;
+  if(RHY[s]===1)tef(t,true);else if(RHY[s]===2)tef(t,false);
+  if(musStep%32===0)mel=Math.random()<.5?0:4;
+  if(Math.random()<(s%2===0?.72:.38)){mel=Math.max(0,Math.min(SCL.length-1,mel+[-2,-1,-1,0,1,1,2][Math.floor(Math.random()*7)]));
+    const f=MB*Math.pow(2,SCL[mel]/12);pluck(f,t,.2,BEAT*(Math.random()<.3?2.4:1.4));
+    if(Math.random()<.16&&mel<SCL.length-1)pluck(MB*Math.pow(2,SCL[mel+1]/12),t+BEAT*.5,.1,BEAT*.8);}
+  musNext+=BEAT;musStep++;}}
+document.addEventListener('visibilitychange',()=>{if(!ac)return;if(document.hidden){try{ac.suspend();}catch(e){}}else{try{ac.resume();}catch(e){}}musApply();});
+applySet();
 
 /* --- picking --- */
 const hitBoxes=[];
