@@ -1931,7 +1931,7 @@ async function performMove(side,m){
   st=applyMove(st,side,m);
   syncMeshes(st);
   const att=topChecker(side,m.to),aw=att&&att.userData.tw,aDur=aw?aw.dur:.4;
-  if(m.hit&&victim){
+  if(m.hit&&victim){lastEv=side===1?'az önce rakibin pulunu kırdın':'rakip az önce senin pulunu kırdı';
     if(aw)aw.arc+=.6;
     const vu=victim.userData,to=vu.tw?vu.tw.to.clone():vu.cur.clone();
     if(settings.fx){
@@ -2142,7 +2142,7 @@ function trail(pos,side){const m=trails.find(x=>!x.visible)||trails[0];m.positio
 async function doHumanMove(m){
   busy=true;selected=null;
   undoStack.push({st:clone(st),rem:rem.slice(),log:turnLog.slice(),hits:handHits,mv:turnMv.slice()});turnMv.push({from:m.from,to:m.to,d:m.d,hit:!!m.hit});
-  rem=removeOne(rem,m.d);turnLog.push(nota(me,m));if(m.hit&&mode==='solo'&&me===0){handHits++;if(Math.random()<.6){const gg=gid;setTimeout(()=>{if(gg===gid)say(1,pick(['Vay vay…','Şansına bak!','Bunu unutmam.','Hele hele…']));},900);}}
+  rem=removeOne(rem,m.d);turnLog.push(nota(me,m));if(m.hit&&mode==='solo'&&me===0){handHits++;if(Math.random()<.6){const gg=gid;setTimeout(()=>{if(gg===gid)botQuip(pick(['Vay vay…','Şansına bak!','Bunu unutmam.','Hele hele…']));},900);}}
   renderUI();const g=gid;await performMove(me,m);if(g!==gid)return;busy=false;buzz(12);
   if(st.off[me]===15){finishHumanLog();if(mode==='net')netSend({t:'turn',mv:turnMv,s:st});return endGame(me);}
   refreshLegal();
@@ -2226,7 +2226,7 @@ async function botPlay(r,g){
   addLog('<b>'+nameOf(1)+' '+r.slice(0,2).join('-')+':</b> '+(parts.join(' ')||'kapalı, pas'));
   if(st.off[1]===15)return endGame(1);
   me=0;phase='human-roll';busy=false;if(!settings.autoRoll)armTimer();
-  if(hitAny)say(1,pick(quips.hit));
+  if(hitAny)botQuip(pick(quips.hit));
   status(moves.length?'Sıra sende':nameOf(1)+' oynayamadı',settings.autoRoll?'':'Zarını at.');
   renderUI();maybeAutoRoll();
 }
@@ -2248,7 +2248,7 @@ function endGame(w,forced){
     const d=P.rating-r0;extra=' Rating '+P.rating+' ('+(d>=0?'+':'')+d+').';
     const nu=unlocked().filter(id=>!before.includes(id));
     if(nu.length)extra+=' Yeni başarım: '+nu.map(id=>ACH.find(a=>a.id===id).name).join(', ')+'.';
-    if(!forced)say(1,w===0?pick(['Eline sağlık.','Bu sefer senin.','Rövanş isterim!']):pick(mars?quips.mars:quips.win));
+    if(!forced)botQuip(w===0?pick(['Eline sağlık.','Bu sefer senin.','Rövanş isterim!']):pick(mars?quips.mars:quips.win));
   }
   if(mode==='net'){profile.netPlayed=(profile.netPlayed||0)+1;if(w===mySide){profile.netWon=(profile.netWon||0)+1;profile.points+=pts*15;}saveJ('kt-profile',profile);}
   renderUI();
@@ -2722,26 +2722,29 @@ const BR=[
  [/(rövanş|rovans|tekrar|bir daha|bi daha)/i,['Olur, bir el daha atarız','Tamamdır','Gel bakalım 😄']],
  [/(çay|cay|kahve|simit)/i,['Çaylar benden 😄','Ocakçı iki çay!','Kahve olsa iyi giderdi']],
  [/\?$/,['Bilmem ki 🙂','Olabilir','Hmm','Sonra konuşuruz, oyuna bakalım']]];
-const CHEAP=/^(s\.?a\.?|sa|selam|slm|selamün|selamun|merhaba|mrb|meraba|hey|hi|sea|selamlar|sağol|sagol|sağ ol|teşekkürler|tesekkurler|eyvallah|tşk|tsk|haha+|hehe+|ahah+|sjsj+|ksks+|😂+|😄+|lol|ok|tamam|tm|tmm|iyi oyunlar|kolay gelsin|bol şans)[\s!.?]*$/i;
 function localReply(t,P){for(const[re,ans]of BR)if(re.test(t)){if(Math.random()<Math.max(.8,P.ch||.8))botSay(pick2(ans).replace('__CITY__',OPP[diff].city||'İstanbul'));return;}
   if(Math.random()<.45*(P.ch||.8))botSay(pick2(['🙂','Hı hı','Aynen','Hadi bakalım','😄','Olur']));}
-let aiBusy=false;
-async function aiReply(){const F=OPP[diff];if(!F||!AU.st||!AU.st.ai||aiBusy)return false;aiBusy=true;const g=gid,t0=performance.now();
-  try{const h=chLog.slice(0,8).filter(m=>!m.sys).reverse().map(m=>({f:m.side===mySide?'u':'b',t:m.txt}));
-    const ctx='senin pip '+pip(st,1)+', rakibin pip '+pip(st,0)+', maç '+match.b+'-'+match.p+(st.bar[1]?', kırık pulun var':'')+(st.bar[0]?', rakibin kırık pulu var':'');
-    const j=await api('POST','/tv/chat',{p:{n:F.name,c:F.city||'',low:!!(F.persona&&F.persona.low)},h,ctx});
+let aiBusy=false,aiT=0,lastEv='';
+const typeDelay=x=>1300+Math.min(5000,x.length*120)+Math.random()*2600;
+async function aiReply(extra){const F=OPP[diff];if(!F||!AU.st||!AU.st.ai||aiBusy)return false;aiBusy=true;const g=gid,t0=performance.now();
+  try{const h=chLog.slice(0,10).filter(m=>!m.sys).reverse().map(m=>({f:m.side===mySide?'u':'b',t:m.txt}));if(extra)h.push({f:'u',t:extra});
+    const ctx='senin pip '+pip(st,1)+', rakibin pip '+pip(st,0)+(pip(st,1)<pip(st,0)-15?' (öndesin)':pip(st,1)>pip(st,0)+15?' (geridesin)':'')+', maç '+match.b+'-'+match.p+(st.bar[1]?', kırık pulun var':'')+(st.bar[0]?', rakibin kırık pulu var':'')+(lastEv?', '+lastEv:'');lastEv='';
+    const j=await api('POST','/tv/chat',{p:{n:F.name,c:F.city||'',low:!!(F.persona&&F.persona.low),old:!!(F.persona&&F.persona.noemo)},h,ctx});
     if(g!==gid)return true;const x=filt(String(j.x||'')).slice(0,120);if(!x)return true;
-    botSay(x,Math.max(300,900+Math.min(3200,x.length*85)-(performance.now()-t0)));return true;}
+    botSay(x,Math.max(600,typeDelay(x)-(performance.now()-t0)));return true;}
   catch(e){return false;}finally{aiBusy=false;}}
-function botHear(t,qi,bad){if(!OPP[diff])return;const P=OPP[diff].persona||{ch:.8};
-  if(bad){if(Math.random()<.9)botSay(pick2(['Ayıp oluyor, kahvehanede adap var.','Sakin ol, oyun bu 🙂','Terbiyeni bozma bak.','Yakışmadı.']));return;}
-  if(qi!=null&&CHAT[qi]&&Math.random()<.85){botSay(CHAT[qi][1]);return;}
-  if(CHEAP.test(t.trim())||Math.random()<.06){localReply(t,P);return;}
-  aiReply().then(ok=>{if(!ok)localReply(t,P);});}
-function botGotGift(k){const g=gid;botSay(pick2(['Eyvallah, eline sağlık 🙏','Sağ ol, çayın hatırı kırk yıl 🙂','Ooo teşekkürler!','Afiyetle içerim, sağ ol','Eyvallah kardeşim']),1500+Math.random()*1200);
+function lastUser(){const m=chLog.find(m=>!m.sys&&m.side===mySide);return m?m.txt:'';}
+function botHear(t,qi,bad){if(!OPP[diff])return;const P=OPP[diff].persona||{ch:.8},g=gid;
+  clearTimeout(aiT);aiT=setTimeout(async()=>{if(g!==gid||mode!=='solo')return;if(Math.random()<.1)return;
+    const ok=await aiReply();if(ok)return;const u=lastUser();
+    if(bad||/\*{3}/.test(u)){botSay(pick2(['Ayıp oluyor, kahvehanede adap var.','Sakin ol, oyun bu 🙂','Terbiyeni bozma bak.']));return;}
+    if(qi!=null&&CHAT[qi]&&u===CHAT[qi][0]){botSay(CHAT[qi][1]);return;}localReply(u,P);},2600+Math.random()*3800);}
+function botQuip(t){const F=OPP[diff];if(!F)return;if(!F.fake){say(1,t);return;}if(Math.random()<.55)return;
+  botSay(t.toLocaleLowerCase('tr').replace(/[.!…]+$/,''),900+Math.random()*2200);}
+function botGotGift(k){const g=gid,G=GIFTS.find(x=>x[0]===k);setTimeout(async()=>{if(g!==gid)return;const ok=await aiReply('(sana '+(G?G[1].toLocaleLowerCase('tr'):'hediye')+' ısmarladı)');if(!ok)botSay(pick2(['Eyvallah, eline sağlık 🙏','Sağ ol, çayın hatırı kırk yıl 🙂','Ooo teşekkürler!','Eyvallah kardeşim']));},1800+Math.random()*2500);
   if(Math.random()<.4)setTimeout(()=>{if(g===gid&&mode==='solo'&&phase!=='menu'&&phase!=='over')giftFly(1,0,pick2(['cay','kahve','simit']));},3800+Math.random()*2500);}
 function botOpenChat(){if(mode!=='solo')return;const F=OPP[diff];if(!F)return;const P=F.persona||{ch:.5};
-  if(Math.random()<(F.fake?.55*(P.ch||.6)+.1:.25))botSay(pick2(F.fake?['Selam','sa','Kolay gelsin','İyi oyunlar','Selam, bol şans','Hadi bakalım']:['Hoş geldin, otur bakalım.','Çaylar demlendi, başlayalım.']),2500+Math.random()*3000);
+  if(Math.random()<(F.fake?.4*(P.ch||.6)+.05:.25))botSay(pick2(F.fake?['slm','selam','sa','kolay gelsin','iyi oyunlar','selamlar','hadi bakalım','bol şans']:['Hoş geldin, otur bakalım.','Çaylar demlendi, başlayalım.']),2500+Math.random()*3000);
   if(F.fake&&Math.random()<.08){const g=gid;setTimeout(()=>{if(g===gid&&mode==='solo'&&phase!=='menu')giftFly(1,0,pick2(['cay','kahve']));},7000);}}
 
 /* =================== SAHTE PROFİLLER + ÇEVRİMİÇİ EŞLEŞME =================== */
